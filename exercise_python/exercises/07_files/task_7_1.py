@@ -14,3 +14,36 @@ Outbound Interface:    FastEthernet0/0
 Ограничение: Все задания надо выполнять используя только пройденные темы.
 
 '''
+
+#________________________________________________________________________________________________
+#
+#Answer
+
+file_ospf =  open('/home/git/GogyYa/exercise_python/exercises/07_files/ospf.txt')
+
+template1 = '''
+Protocol:              {protocol}
+Prefix:                {pref}
+AD/Metric:             {AD}
+Next-Hop:              {NextHop}
+Last update:           {lastUp}
+Outbound Interface:    {Intf}
+'''
+while True:
+
+    line = file_ospf.readline().replace(']' , '').replace('[', '').split()
+    #line = line.replace(']' , '').replace('[', '').split()
+    #print(line.rstrip())
+    if not line:
+        break
+
+
+    if line[0] == 'O':
+        protocol = 'OSPF'
+    else:
+        protocol = line[0]
+    print(template1.format(protocol=protocol, pref=line[1], AD=line[2], NextHop=line[4],
+                           lastUp=line[-2], Intf=line[-1]))
+
+
+
